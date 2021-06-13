@@ -160,15 +160,16 @@ public class IntrospectedTableMyBatis3Impl extends IntrospectedTable {
         }
 
         if (getRules().generateJavaService()) {
-            AbstractJavaClientGenerator javaServiceGenerator = new JavaServiceGenerator(getModelProject());
-            initializeAbstractGenerator(javaServiceGenerator, warnings,
-                    progressCallback);
-            javaGenerators.add(javaServiceGenerator);
+            //AbstractJavaClientGenerator javaServiceGenerator = new JavaServiceGenerator(getModelProject());
+            //initializeAbstractGenerator(javaServiceGenerator, warnings,
+            //        progressCallback);
+            //javaGenerators.add(javaServiceGenerator);
 
-            AbstractJavaClientGenerator javaServiceImplGenerator = new JavaServiceImplGenerator(getModelProject());
-            initializeAbstractGenerator(javaServiceImplGenerator, warnings,
-                    progressCallback);
-            javaGenerators.add(javaServiceImplGenerator);
+            //AbstractJavaClientGenerator javaServiceImplGenerator = new JavaServiceImplGenerator(getModelProject());
+            //initializeAbstractGenerator(javaServiceImplGenerator, warnings,
+            //        progressCallback);
+            //javaGenerators.add(javaServiceImplGenerator);
+
             AbstractJavaClientGenerator javaInnerServiceGenerator = new JavaInnerServiceGenerator(getModelProject());
             initializeAbstractGenerator(javaInnerServiceGenerator, warnings,
                     progressCallback);

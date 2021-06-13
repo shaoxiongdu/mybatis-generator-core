@@ -59,7 +59,7 @@ public class VueGenerator extends AbstractJavaServiceImplMethodGenerator {
             {
                 // 添加到zip
                 String basePath = "src/generate/resources/js/";
-                String path = basePath + "components/" + StringUtility.getFirstLowerCaseWord(modelType.getShortName())+"/";
+                String path = basePath + "view/" + StringUtility.getFirstLowerCaseWord(modelType.getShortName())+"/";
                 String fileName = "list.vue";
                 if (template.contains("api")) {
                     path = basePath + "api/";
