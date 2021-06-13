@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--<!DOCTYPE generatorConfiguration SYSTEM-->
+<!--        "mybatis-generator-config_1_0.dtd">-->
+
+
+<generatorConfiguration>
+    <!---Mybatis上下文-->
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 当表名或者字段名为SQL关键字的时候，可以设置"autoDelimitKeywords"属性为true -->
+        <property name="autoDelimitKeywords" value="false"></property>
+        <!-- JavaBean 实现 序列化 接口 -->
+        <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />-->
+        <!-- 自定义物理分页  可生成支持Mysql数据的limit  不支持Oracle -->
+        <plugin type="org.mybatis.generator.custom.page.PaginationPlugin" />
+        <!--生成@Mapper注解-->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+        <!-- 自定义查询指定字段  -->
+        <plugin type="org.mybatis.generator.custom.field.FieldsPlugin" />
+        <!-- 此处是将Example改名为Criteria 当然 想改成什么都行~    -->
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$" />
+            <property name="replaceString" value="Criteria" />
+        </plugin>
+        <!-- 此处是将UserMapper.xml改名为UserDao.xml 当然 想改成什么都行~ -->
+<!--        <plugin type="org.mybatis.generator.custom.rename.RenameSqlMapperPlugin">-->
+<!--            <property name="searchString" value="Mapper" />-->
+<!--            <property name="replaceString" value="Dao" />-->
+<!--        </plugin>-->
+        <!-- 此处是将UserMapper改名为UserDao 接口 当然 想改成什么都行~  -->
+        <plugin type="org.mybatis.generator.custom.rename.RenameJavaMapperPlugin">
+            <property name="searchString" value="Mapper$" />
+            <property name="replaceString" value="Dao" />
+        </plugin>
+        <!--自定义添加注释-->
+        <commentGenerator type="org.mybatis.generator.custom.comment.MyCommentGenerator">
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--配置数据库的链接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/inc?characterEncoding=UTF-8"
+                        userId="root"
+                        password="root">
+            <!-- 设置 useInformationSchema 属性为 true -->
+            <property name="useInformationSchema" value="true" />
+        </jdbcConnection>
+        <!--默认为false，把JDBC DECIMAL 和NUMERIC类型解析为Integer，为true时把JDBC DECIMAL 和NUMERIC类型解析为java.math.BigDecimal-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--实体类生成信息-->
+        <javaModelGenerator targetPackage="com.inc.admin.domain.biz" targetProject="src/generate/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+            <!--继承父类（里面有分页信息）-->
+            <property name="rootClass" value="com.inc.admin.domain.sys.BaseEntity"/>
+        </javaModelGenerator>
+        <!--mybatis 的xml文件地址-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/generate/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--mybatis的mapper接口-->
+        <javaClientGenerator targetPackage="com.inc.admin.dao.biz" targetProject="src/generate/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 生成service层 包名和位置 -->
+        <javaServiceGenerator targetPackage="com.inc.admin.service.biz" targetProject="src/generate/java" />
+        <!-- 生成controller层 包名和位置 -->
+        <javaControllerGenerator targetPackage="com.inc.admin.controller.biz" targetProject="src/generate/java" />
+
+        <!-- 作者 -->
+        <author name="tanzibiao"/>
+        <!--要生成的表结构-->
+        <table tableName="test" domainObjectName="Test"/>
+
+    </context>
+
+</generatorConfiguration>
